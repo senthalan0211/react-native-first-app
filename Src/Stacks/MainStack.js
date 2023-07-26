@@ -1,5 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import FirstScreen from '../Screens/DashboardScreens/FirstScreen';
+import FirstScreen from '../Screens/MainScreens/FirstScreen';
 
 const MainStack = () => {
   const Stack = createNativeStackNavigator();
