@@ -2,12 +2,41 @@ import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 import React from 'react';
 import InputBox from '../../Components/InputBox';
 import Button from '../../Components/Button';
+import {COLORS} from '../../Utilities/Colors';
+import TextContent from '../../Components/Text';
+import {useFormik} from 'formik';
+import * as Yup from 'yup';
 
 const Login = ({navigation}) => {
+  const SignupSchema = Yup.object().shape({
+    email: Yup.string()
+      .email('Invalid email address')
+      .min(5, 'Email must be 5 characters long')
+      .max(30, 'Too Long!')
+      .required('Email is required'),
+    password: Yup.string()
+      .min(3, 'Password must be 3 characters long')
+      .max(20, 'Password must be 20 characters long')
+      .required('Password is required'),
+  });
+
+  const {handleChange, handleSubmit, errors, values, touched} = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: SignupSchema,
+    onSubmit: values => {
+      handleLogin(values);
+    },
+  });
+
+  const handleLogin = data => {};
+
   return (
     <ScrollView
       contentContainerStyle={styles.container}
-      showsHorizontalScrollIndicator={false}>
+      showsVerticalScrollIndicator={false}>
       <Image
         style={styles.logo}
         source={require('../../Assets/Png/animal.png')}
@@ -16,13 +45,27 @@ const Login = ({navigation}) => {
         placeholder="Enter your email id"
         label="Email"
         customInputStyles={{marginBottom: 5}}
-        // errors={true}
-        // errorText="Please Enter all fields"
+        value={values.email}
+        onChangeText={handleChange('email')}
+        errors={errors.email && touched.email ? true : null}
+        errorText={errors.email}
       />
-      <InputBox placeholder="Enter your password" label="Passoword" />
-      <Button title="Login" />
+      <InputBox
+        placeholder="Enter your password"
+        label="Passoword"
+        setPassword={true}
+        value={values.password}
+        onChangeText={handleChange('password')}
+        errors={errors.password && touched.password ? true : null}
+        errorText={errors.password}
+      />
+      <Button title="Login" onPress={handleSubmit} />
 
-      <Text style={styles.account}>Don’t have an account ?</Text>
+      <TextContent
+        customTextStyles={styles.account}
+        content="Don’t have an account ?"
+      />
+
       <Text style={styles.signUp} onPress={() => navigation.navigate('SignUp')}>
         Sign Up
       </Text>
@@ -40,15 +83,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   account: {
-    textAlign: 'center',
     fontSize: 16,
-    color: 'black',
+    color: COLORS.grey,
     marginBottom: 5,
   },
   signUp: {
     textAlign: 'center',
     fontSize: 14,
-    color: 'blue',
+    color: COLORS.buttonBgColor,
   },
   logo: {
     width: 120,
