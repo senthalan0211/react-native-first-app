@@ -1,10 +1,29 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {COLORS} from '../Utilities/Colors';
+import {FONTSIZES} from '../Utilities/FontSizes';
+import {FONTS} from '../Utilities/Fonts';
 
-const TextContent = ({content = '', customTextStyles}) => {
+const TextContent = ({
+  content = '',
+  customTextStyles,
+  isTouchable = false,
+  onPress,
+}) => {
   return (
-    <Text style={[styles.textContent, {...customTextStyles}]}>{content}</Text>
+    <View>
+      {isTouchable ? (
+        <Text
+          style={[styles.textContent, {...customTextStyles}]}
+          onPress={onPress}>
+          {content}
+        </Text>
+      ) : (
+        <Text style={[styles.textContent, {...customTextStyles}]}>
+          {content}
+        </Text>
+      )}
+    </View>
   );
 };
 
@@ -12,9 +31,9 @@ export default TextContent;
 
 const styles = StyleSheet.create({
   textContent: {
-    fontSize: 16,
+    fontSize: FONTSIZES.medium,
     color: COLORS.black,
+    fontFamily: FONTS.Andika.regular,
     textAlign: 'center',
-    fontWeight: 'normal',
   },
 });

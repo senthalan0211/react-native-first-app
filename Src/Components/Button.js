@@ -1,6 +1,8 @@
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {COLORS} from '../Utilities/Colors';
+import {FONTSIZES} from '../Utilities/FontSizes';
+import {FONTS} from '../Utilities/Fonts';
 
 const Button = ({title = '', onPress, customStyles, customStylesText}) => {
   return (
@@ -28,7 +30,8 @@ const styles = StyleSheet.create({
 
   BtnTextColor: {
     color: COLORS.white,
+    fontSize: FONTSIZES.small,
+    fontFamily: FONTS.Andika.bold,
     textTransform: 'uppercase',
-    fontSize: 14,
   },
 });

@@ -7,6 +7,9 @@ import {
   Image,
 } from 'react-native';
 import React, {useState} from 'react';
+import {COLORS} from '../Utilities/Colors';
+import {FONTSIZES} from '../Utilities/FontSizes';
+import {FONTS} from '../Utilities/Fonts';
 
 const InputBox = ({
   label = '',
@@ -71,32 +74,34 @@ export default InputBox;
 
 const styles = StyleSheet.create({
   InputBox: {
+    fontSize: FONTSIZES.small,
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.borderColor,
     width: '100%',
     height: 50,
     borderWidth: 1,
     borderRadius: 6,
     elevation: 2,
     paddingLeft: 20,
-    fontSize: 14,
-    backgroundColor: 'white',
-    borderColor: 'gray',
     position: 'relative',
   },
   placeholder: {
-    color: 'rgba(0,0,0,1)',
+    color: COLORS.placeHolderColor,
   },
   label: {
-    fontSize: 15,
+    fontSize: FONTSIZES.medium,
+    color: COLORS.black,
+    fontFamily: FONTS.Andika.bold,
     alignItems: 'flex-start',
     paddingBottom: 3,
     paddingTop: 5,
-    fontWeight: 600,
-    color: 'black',
   },
   error: {
-    fontSize: 13,
+    fontSize: FONTSIZES.tiny,
+    color: COLORS.red,
+    fontFamily: FONTS.Andika.regular,
     opacity: 0.7,
-    color: 'red',
+    marginVertical: 1,
   },
   eye: {
     width: 25,

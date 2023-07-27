@@ -9,7 +9,7 @@
     >
 
      <ImageView
-         android:layout_width="389dp"
+         android:layout_width="359dp"
          android:layout_height="643dp"
          android:scaleType="center"
          android:src="@drawable/launch_screen" />

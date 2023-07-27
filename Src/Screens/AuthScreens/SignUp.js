@@ -1,8 +1,10 @@
-import {Image, StyleSheet, Text, View, ScrollView} from 'react-native';
+import {Image, StyleSheet, ScrollView} from 'react-native';
 import React from 'react';
 import InputBox from '../../Components/InputBox';
 import Button from '../../Components/Button';
 import {COLORS} from '../../Utilities/Colors';
+import {FONTSIZES} from '../../Utilities/FontSizes';
+import {FONTS} from '../../Utilities/Fonts';
 import TextContent from '../../Components/Text';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
@@ -15,7 +17,7 @@ const SignUp = ({navigation}) => {
       .required('Name is required'),
     email: Yup.string()
       .email('Invalid email address')
-      .min(5, 'Email must be 5 characters long')
+      .min(5, 'Email must be 10 characters long')
       .max(30, 'Too Long!')
       .required('Email is required'),
     mobile: Yup.string()
@@ -106,9 +108,13 @@ const SignUp = ({navigation}) => {
         content="Already have an account ?"
         customTextStyles={styles.account}
       />
-      <Text style={styles.signUp} onPress={() => navigation.navigate('Login')}>
-        Login
-      </Text>
+
+      <TextContent
+        content="Login"
+        onPress={() => navigation.navigate('Login')}
+        customTextStyles={styles.signUp}
+        isTouchable={true}
+      />
     </ScrollView>
   );
 };
@@ -123,16 +129,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   account: {
-    textAlign: 'left',
-    fontSize: 16,
+    fontSize: FONTSIZES.medium,
     color: COLORS.grey,
+    fontFamily: FONTS.Andika.bold,
     marginBottom: 5,
+    textAlign: 'left',
   },
   signUp: {
-    textAlign: 'left',
-    fontSize: 14,
+    fontSize: FONTSIZES.small,
     color: COLORS.buttonBgColor,
     marginBottom: 20,
+    textAlign: 'left',
   },
   logo: {
     width: 120,

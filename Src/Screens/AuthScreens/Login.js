@@ -3,12 +3,14 @@ import React from 'react';
 import InputBox from '../../Components/InputBox';
 import Button from '../../Components/Button';
 import {COLORS} from '../../Utilities/Colors';
+import {FONTSIZES} from '../../Utilities/FontSizes';
 import TextContent from '../../Components/Text';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
+import {FONTS} from '../../Utilities/Fonts';
 
 const Login = ({navigation}) => {
-  const SignupSchema = Yup.object().shape({
+  const loginSchema = Yup.object().shape({
     email: Yup.string()
       .email('Invalid email address')
       .min(5, 'Email must be 5 characters long')
@@ -25,7 +27,7 @@ const Login = ({navigation}) => {
       email: '',
       password: '',
     },
-    validationSchema: SignupSchema,
+    validationSchema: loginSchema,
     onSubmit: values => {
       handleLogin(values);
     },
@@ -66,9 +68,12 @@ const Login = ({navigation}) => {
         content="Don’t have an account ?"
       />
 
-      <Text style={styles.signUp} onPress={() => navigation.navigate('SignUp')}>
-        Sign Up
-      </Text>
+      <TextContent
+        customTextStyles={styles.signUp}
+        content="Sign Up"
+        onPress={() => navigation.navigate('SignUp')}
+        isTouchable={true}
+      />
     </ScrollView>
   );
 };
@@ -83,14 +88,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   account: {
-    fontSize: 16,
+    fontSize: FONTSIZES.medium,
     color: COLORS.grey,
+    fontFamily: FONTS.Andika.bold,
     marginBottom: 5,
   },
   signUp: {
-    textAlign: 'center',
-    fontSize: 14,
+    fontSize: FONTSIZES.small,
     color: COLORS.buttonBgColor,
+    textAlign: 'center',
   },
   logo: {
     width: 120,
