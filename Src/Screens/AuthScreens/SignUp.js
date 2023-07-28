@@ -28,7 +28,10 @@ const SignUp = ({navigation}) => {
       .min(3, 'Password must be 3 characters long')
       .required('Password is required'),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .oneOf(
+        [Yup.ref('password'), null],
+        'Password and confirm password  must match',
+      )
       .required('confirm Password is required'),
   });
 
@@ -59,7 +62,6 @@ const SignUp = ({navigation}) => {
       <InputBox
         placeholder="Enter your name"
         label="Name"
-        customInputStyles={{marginBottom: 5}}
         value={values.name}
         errors={errors.name && touched.name ? true : null}
         errorText={errors.name}
@@ -68,7 +70,6 @@ const SignUp = ({navigation}) => {
       <InputBox
         placeholder="Enter your email id"
         label="Email"
-        customInputStyles={{marginBottom: 5}}
         value={values.email}
         errors={errors.email && touched.email ? true : null}
         errorText={errors.email}
@@ -85,9 +86,9 @@ const SignUp = ({navigation}) => {
         keyboardType="numeric"
       />
       <InputBox
-        placeholder="Enter your mobile number"
+        placeholder="Enter your password"
         label="Password"
-        setPassword={true}
+        isPassword={true}
         value={values.password}
         errors={errors.password && touched.password ? true : null}
         errorText={errors.password}
@@ -96,7 +97,7 @@ const SignUp = ({navigation}) => {
       <InputBox
         placeholder="Enter your confirm password"
         label="Confirm Passoword"
-        setPassword={true}
+        isPassword={true}
         value={values.confirmPassword}
         errors={errors.confirmPassword && touched.confirmPassword ? true : null}
         errorText={errors.confirmPassword}
@@ -132,7 +133,6 @@ const styles = StyleSheet.create({
     fontSize: FONTSIZES.medium,
     color: COLORS.grey,
     fontFamily: FONTS.Andika.bold,
-    marginBottom: 5,
     textAlign: 'left',
   },
   signUp: {

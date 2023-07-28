@@ -9,13 +9,29 @@
     >
 
      <ImageView
-         android:layout_width="359dp"
-         android:layout_height="643dp"
+         android:layout_width="410dp"
+         android:layout_height="657dp"
+         android:layout_alignParentStart="true"
+         android:layout_alignParentTop="true"
+         android:layout_marginTop="0dp"
          android:scaleType="center"
          android:src="@drawable/launch_screen" />
 
+<!--     <TextView-->
+<!--         android:id="@+id/textView"-->
+<!--         android:layout_width="wrap_content"-->
+<!--         android:layout_height="wrap_content"-->
+<!--         android:layout_alignParentStart="true"-->
+<!--         android:layout_alignParentTop="true"-->
+<!--         android:layout_centerHorizontal="true"-->
+<!--          android:layout_gravity="center"-->
+<!--         android:layout_marginTop="-70dp"-->
+<!--         android:text="Black Magic"-->
+<!--         android:textColor="@color/black"-->
+<!--         android:textSize="35dp" />-->
 
-<!--    <TextView-->
+
+     <!--    <TextView-->
 <!--        android:id="@+id/textView5"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->

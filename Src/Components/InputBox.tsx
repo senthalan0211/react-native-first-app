@@ -5,11 +5,31 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  KeyboardTypeOptions,
+  TextStyle,
+  StyleProp,
 } from 'react-native';
 import React, {useState} from 'react';
 import {COLORS} from '../Utilities/Colors';
 import {FONTSIZES} from '../Utilities/FontSizes';
 import {FONTS} from '../Utilities/Fonts';
+
+interface InputProps {
+  label?: string;
+  placeholder?: string;
+  value?: string;
+  onChangeText?: (text: string) => void;
+  errorText?: string;
+  customInputStyles?: StyleProp<TextStyle>;
+  customLabelStyles?: StyleProp<TextStyle>;
+  isShownLabel?: boolean;
+  keyboardType?: KeyboardTypeOptions;
+  errors?: boolean;
+  placeholderTextColor?: string;
+  maxLength?: number;
+  editable?: boolean;
+  isPassword?: boolean;
+}
 
 const InputBox = ({
   label = '',
@@ -25,8 +45,8 @@ const InputBox = ({
   placeholderTextColor,
   maxLength,
   editable,
-  setPassword,
-}) => {
+  isPassword,
+}: InputProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handlePassword = () => {
@@ -35,27 +55,27 @@ const InputBox = ({
   return (
     <View>
       {isShownLabel && label ? (
-        <Text style={[styles.label, {...customLabelStyles}]}>{label}</Text>
+        <Text style={[styles.label, customLabelStyles]}>{label}</Text>
       ) : null}
       <TextInput
         placeholder={placeholder}
-        placeholderTextColor={[styles.placeholder, {...placeholderTextColor}]}
+        placeholderTextColor={'grey'}
         value={value}
         onChangeText={onChangeText}
-        style={[styles.InputBox, {...customInputStyles}]}
+        style={[styles.InputBox, customInputStyles]}
         keyboardType={keyboardType}
         maxLength={maxLength}
         editable={editable}
-        secureTextEntry={setPassword ? !showPassword : false}
+        secureTextEntry={isPassword ? !showPassword : false}
       />
 
-      {setPassword ? (
+      {isPassword ? (
         <TouchableOpacity
           onPress={handlePassword}
-          style={styles.eyeBtn}
+          style={styles.eyeButton}
           activeOpacity={0.8}>
           <Image
-            style={styles.eye}
+            style={styles.eyeImage}
             source={
               showPassword
                 ? require('../Assets/Png/eyeOpen.png')
@@ -82,7 +102,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 6,
     elevation: 2,
-    paddingLeft: 20,
+    paddingLeft: 15,
     position: 'relative',
   },
   placeholder: {
@@ -93,8 +113,6 @@ const styles = StyleSheet.create({
     color: COLORS.black,
     fontFamily: FONTS.Andika.bold,
     alignItems: 'flex-start',
-    paddingBottom: 3,
-    paddingTop: 5,
   },
   error: {
     fontSize: FONTSIZES.tiny,
@@ -103,11 +121,11 @@ const styles = StyleSheet.create({
     opacity: 0.7,
     marginVertical: 1,
   },
-  eye: {
+  eyeImage: {
     width: 25,
     height: 16,
   },
-  eyeBtn: {
+  eyeButton: {
     position: 'absolute',
     top: 50,
     right: 20,

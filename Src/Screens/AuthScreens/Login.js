@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
+import {StyleSheet, Image, ScrollView} from 'react-native';
 import React from 'react';
 import InputBox from '../../Components/InputBox';
 import Button from '../../Components/Button';
@@ -13,7 +13,7 @@ const Login = ({navigation}) => {
   const loginSchema = Yup.object().shape({
     email: Yup.string()
       .email('Invalid email address')
-      .min(5, 'Email must be 5 characters long')
+      .min(5, 'Email must be 10 characters long')
       .max(30, 'Too Long!')
       .required('Email is required'),
     password: Yup.string()
@@ -44,9 +44,8 @@ const Login = ({navigation}) => {
         source={require('../../Assets/Png/animal.png')}
       />
       <InputBox
-        placeholder="Enter your email id"
+        placeholder="Enter your email"
         label="Email"
-        customInputStyles={{marginBottom: 5}}
         value={values.email}
         onChangeText={handleChange('email')}
         errors={errors.email && touched.email ? true : null}
@@ -55,7 +54,7 @@ const Login = ({navigation}) => {
       <InputBox
         placeholder="Enter your password"
         label="Passoword"
-        setPassword={true}
+        isPassword={true}
         value={values.password}
         onChangeText={handleChange('password')}
         errors={errors.password && touched.password ? true : null}
@@ -72,7 +71,7 @@ const Login = ({navigation}) => {
         customTextStyles={styles.signUp}
         content="Sign Up"
         onPress={() => navigation.navigate('SignUp')}
-        isTouchable={true}
+        // isTouchable={true}
       />
     </ScrollView>
   );
@@ -91,7 +90,6 @@ const styles = StyleSheet.create({
     fontSize: FONTSIZES.medium,
     color: COLORS.grey,
     fontFamily: FONTS.Andika.bold,
-    marginBottom: 5,
   },
   signUp: {
     fontSize: FONTSIZES.small,
