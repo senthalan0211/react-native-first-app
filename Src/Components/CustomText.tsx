@@ -11,7 +11,7 @@ interface TextcontentProps {
   onPress: () => void;
 }
 
-const TextContent = ({
+const CustomText = ({
   content = '',
   customTextStyles,
   isTouchable = false,
@@ -30,7 +30,7 @@ const TextContent = ({
   );
 };
 
-export default TextContent;
+export default CustomText;
 
 const styles = StyleSheet.create({
   textContent: {

@@ -5,7 +5,7 @@ const MainStack = () => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="FirstScreen" component={FirstScreen} />
+      <Stack.Screen name="DashBoard" component={FirstScreen} />
     </Stack.Navigator>
   );
 };

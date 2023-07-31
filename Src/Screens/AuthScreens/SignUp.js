@@ -5,11 +5,15 @@ import Button from '../../Components/Button';
 import {COLORS} from '../../Utilities/Colors';
 import {FONTSIZES} from '../../Utilities/FontSizes';
 import {FONTS} from '../../Utilities/Fonts';
-import TextContent from '../../Components/Text';
+import CustomText from '../../Components/CustomText';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
+import {useDispatch} from 'react-redux';
+import {setUserData} from '../../Store/Slices/AuthSlice';
+import {storeUserData} from '../../Utilities/Methods';
 
 const SignUp = ({navigation}) => {
+  const dispatch = useDispatch();
   const SignupSchema = Yup.object().shape({
     name: Yup.string()
       .min(5, 'name must be 5 characters long')
@@ -49,7 +53,14 @@ const SignUp = ({navigation}) => {
     },
   });
 
-  const handleSignUp = data => {};
+  const handleSignUp = data => {
+    console.log('🚀 ~ file: SignUp.js:55 ~ handleSignUp ~ data:', data);
+    dispatch(setUserData(data));
+    storeUserData(dispatch, data);
+    if (data) {
+      navigation.navigate('DashBoard');
+    }
+  };
   return (
     <ScrollView
       contentContainerStyle={styles.container}
@@ -105,12 +116,12 @@ const SignUp = ({navigation}) => {
       />
       <Button title="Sign up" onPress={handleSubmit} />
 
-      <TextContent
+      <CustomText
         content="Already have an account ?"
         customTextStyles={styles.account}
       />
 
-      <TextContent
+      <CustomText
         content="Login"
         onPress={() => navigation.navigate('Login')}
         customTextStyles={styles.signUp}
